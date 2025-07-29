@@ -1,0 +1,57 @@
+.kakao-chat {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #FEE500;
+  color: #3C1E1E;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.kakao-chat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+.kakao-icon {
+  font-size: 1.5rem;
+}
+
+.kakao-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.kakao-text span:first-child {
+  font-size: 0.9rem;
+}
+
+.kakao-text span:last-child {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .kakao-chat {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.8rem 1.2rem;
+  }
+  
+  .kakao-text {
+    display: none;
+  }
+  
+  .kakao-icon {
+    font-size: 1.8rem;
+  }
+} 

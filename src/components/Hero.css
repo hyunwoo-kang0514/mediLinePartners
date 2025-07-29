@@ -1,0 +1,509 @@
+/* Hero Section */
+.hero {
+  background: linear-gradient(to top, #ffe6e6, #ffffff);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -80px;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.hero-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-content {
+  max-width: 500px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1C1C1C;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.hero-title .highlight {
+  color: #FF4D4D;
+  position: relative;
+}
+
+.hero-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #FF4D4D, #FF6B6B);
+  border-radius: 1px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: #666666;
+  margin-bottom: 2rem;
+  font-weight: 400;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #FF4D4D, #FF6B6B);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 77, 77, 0.4);
+}
+
+.btn-secondary {
+  background: white;
+  color: #FF4D4D;
+  border: 2px solid #FF4D4D;
+  box-shadow: 0 4px 15px rgba(255, 77, 77, 0.1);
+}
+
+.btn-secondary:hover {
+  background: #FF4D4D;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+.visual-container {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 77, 77, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 300px;
+}
+
+.data-visualization {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 중앙 피규어 스타일 */
+.central-figure {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: #1C1C1C;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.figure-icon {
+  font-size: 1.5rem;
+  color: white;
+}
+
+/* 시각적 요소 공통 스타일 */
+.visual-element {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(255, 77, 77, 0.15);
+  border: 1px solid rgba(255, 77, 77, 0.1);
+  transition: all 0.3s ease;
+  min-width: 90px;
+  backdrop-filter: blur(10px);
+}
+
+.visual-element:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(255, 77, 77, 0.25);
+}
+
+.element-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.element-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1C1C1C;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* 플로팅 북 스타일 */
+.floating-book {
+  position: absolute;
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(135deg, #FF4D4D, #FF6B6B);
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(255, 77, 77, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  animation: float 4s ease-in-out infinite;
+}
+
+.book-cover {
+  text-align: center;
+  color: white;
+}
+
+.book-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.book-subtitle {
+  font-size: 0.6rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+/* About Us 탭 요소 위치 */
+.about-element-1 {
+  top: 8%;
+  left: 8%;
+  animation: float 3s ease-in-out infinite;
+}
+
+.about-element-2 {
+  top: 12%;
+  right: 12%;
+  animation: float 3s ease-in-out infinite 1s;
+}
+
+.about-element-3 {
+  bottom: 15%;
+  left: 12%;
+  animation: float 3s ease-in-out infinite 2s;
+}
+
+/* PV 서비스 탭 요소 위치 */
+.pv-element-1 {
+  top: 15%;
+  left: 5%;
+  animation: float 3s ease-in-out infinite;
+}
+
+.pv-element-2 {
+  top: 8%;
+  right: 8%;
+  animation: float 3s ease-in-out infinite 1.5s;
+}
+
+.pv-element-3 {
+  bottom: 12%;
+  right: 15%;
+  animation: float 3s ease-in-out infinite 0.5s;
+}
+
+.pv-book {
+  bottom: 8%;
+  left: 8%;
+  animation: float 4s ease-in-out infinite 1s;
+}
+
+/* RA 서비스 탭 요소 위치 */
+.ra-element-1 {
+  top: 12%;
+  left: 15%;
+  animation: float 3s ease-in-out infinite;
+}
+
+.ra-element-2 {
+  top: 20%;
+  right: 5%;
+  animation: float 3s ease-in-out infinite 1s;
+}
+
+.ra-element-3 {
+  bottom: 8%;
+  left: 10%;
+  animation: float 3s ease-in-out infinite 2s;
+}
+
+.ra-book {
+  bottom: 12%;
+  right: 8%;
+  animation: float 4s ease-in-out infinite 0.5s;
+}
+
+/* 플로팅 애니메이션 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+/* 탭 네비게이션 스타일 */
+.hero-tabs {
+  margin-top: 4rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tabs-container {
+  display: flex;
+  gap: 4rem;
+  margin-bottom: 2rem;
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.tab-number {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #666666;
+  font-family: 'Arial', sans-serif;
+}
+
+.tab-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1C1C1C;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-family: 'Arial', sans-serif;
+}
+
+.tab-item.active .tab-number,
+.tab-item.active .tab-title {
+  color: #1C1C1C;
+}
+
+.tab-item:hover .tab-number,
+.tab-item:hover .tab-title {
+  color: #FF4D4D;
+}
+
+.tab-underline {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #1C1C1C;
+  border-radius: 1px;
+}
+
+.tab-content {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tab-content p {
+  font-size: 1.1rem;
+  color: #666666;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .hero-main {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .tabs-container {
+    gap: 2rem;
+  }
+
+  .tab-title {
+    font-size: 0.9rem;
+  }
+
+  .visual-container {
+    height: 250px;
+    padding: 1.5rem;
+  }
+
+  .central-figure {
+    width: 50px;
+    height: 50px;
+  }
+
+  .figure-icon {
+    font-size: 1.2rem;
+  }
+
+  .visual-element {
+    min-width: 70px;
+    padding: 0.8rem;
+  }
+
+  .element-icon {
+    font-size: 1.2rem;
+  }
+
+  .element-text {
+    font-size: 0.65rem;
+  }
+
+  .floating-book {
+    width: 60px;
+    height: 75px;
+  }
+
+  .book-title {
+    font-size: 1rem;
+  }
+
+  .book-subtitle {
+    font-size: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-container {
+    padding: 0 1rem;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .tabs-container {
+    gap: 1.5rem;
+  }
+
+  .tab-title {
+    font-size: 0.8rem;
+  }
+
+  .visual-container {
+    height: 200px;
+    padding: 1rem;
+  }
+
+  .central-figure {
+    width: 40px;
+    height: 40px;
+  }
+
+  .figure-icon {
+    font-size: 1rem;
+  }
+
+  .visual-element {
+    min-width: 60px;
+    padding: 0.6rem;
+  }
+
+  .element-icon {
+    font-size: 1rem;
+  }
+
+  .element-text {
+    font-size: 0.6rem;
+  }
+
+  .floating-book {
+    width: 50px;
+    height: 65px;
+  }
+
+  .book-title {
+    font-size: 0.9rem;
+  }
+
+  .book-subtitle {
+    font-size: 0.45rem;
+  }
+} 
