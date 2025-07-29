@@ -1,12 +1,33 @@
-# React + Vite
+# MediLinePartners
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web introduction page for MediLinePartners
 
-Currently, two official plugins are available:
+## About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+MediLinePartners는 20년 연속 업계 1위 CRO 컨설팅 전문 기업입니다.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **About Us**: 회사 소개 및 전문성
+- **PV Service**: 전문적인 약물감시 서비스
+- **RA Service**: 체계적인 인허가 컨설팅
+
+## Technologies
+
+- React 19
+- Vite
+- Framer Motion
+- CSS3
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
