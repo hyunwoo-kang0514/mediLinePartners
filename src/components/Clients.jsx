@@ -1,5 +1,5 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import './Clients.css'
 
@@ -8,6 +8,9 @@ const Clients = ({ language }) => {
     triggerOnce: true,
     threshold: 0.1
   })
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(true)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,113 +35,263 @@ const Clients = ({ language }) => {
     }
   }
 
+  const slideVariants = {
+    enter: {
+      opacity: 0,
+      x: 100,
+      scale: 0.8
+    },
+    center: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    exit: {
+      opacity: 0,
+      x: -100,
+      scale: 0.8
+    }
+  }
+
   const getContent = () => {
     switch(language) {
       case 'eng':
         return {
-          title: "Drug surveillance is changing.",
-          subtitle: "Leading the change",
-          description: "MEDILINE PARTNERS' clients are the proof.",
-          subDescription: "Companies that have experienced MEDILINE PARTNERS are the evidence."
+          title: "Major Customers",
+          subtitle: "Leading pharmaceutical companies trust us",
+          description: "Companies that have experienced MEDILINE PARTNERS are the evidence of our excellence.",
+          subDescription: "From global giants to innovative biotech companies, we serve them all."
         }
       case 'chn':
         return {
-          title: "药物监测正在发生变化。",
-          subtitle: "引领变革",
-          description: "MEDILINE PARTNERS的客户就是证明。",
-          subDescription: "体验过MEDILINE PARTNERS的公司就是证据。"
+          title: "主要客户",
+          subtitle: "领先的制药公司信任我们",
+          description: "体验过MEDILINE PARTNERS的公司就是我们卓越的证明。",
+          subDescription: "从全球巨头到创新生物技术公司，我们为所有人服务。"
         }
       default: // kor
         return {
-          title: "약물감시는 변화하고 있습니다.",
-          subtitle: "변화에 앞장서는",
-          description: "메디라인파트너스의 고객사 입니다.",
-          subDescription: "메디라인파트너스를 경험한 회사가 그 증거입니다."
+          title: "주요고객사",
+          subtitle: "메디라인파트너스와 함께하는 주요 고객사는 다음과 같습니다",
+          description: "메디라인파트너스를 경험한 회사가 그 증거입니다.",
+          subDescription: "글로벌 제약사부터 혁신적인 바이오 기업까지, 모두를 위한 서비스를 제공합니다."
         }
     }
   }
 
+  // 주요 고객사 데이터 (실제 PNG 파일에 있는 회사들만)
   const clients = [
     // 글로벌 제약사
     { 
       name: "Pfizer", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Pfizer_logo.svg/2560px-Pfizer_logo.svg.png",
-      category: "global" 
+      logo: "pfizer.png",
+      category: "global",
+      description: "Global pharmaceutical leader"
+    },
+    { 
+      name: "Abbott", 
+      logo: "Abbott.png",
+      category: "global",
+      description: "Healthcare innovation leader"
+    },
+    { 
+      name: "AbbVie", 
+      logo: "abbvie.png",
+      category: "global",
+      description: "Biopharmaceutical innovation"
     },
     { 
       name: "AstraZeneca", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/AstraZeneca_logo.svg/2560px-AstraZeneca_logo.svg.png",
-      category: "global" 
+      logo: "AstraZeneka.png",
+      category: "global",
+      description: "Science-based innovation"
     },
     { 
-      name: "Novartis", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Novartis_logo.svg/2560px-Novartis_logo.svg.png",
-      category: "global" 
+      name: "Baxter", 
+      logo: "Baxter.png",
+      category: "global",
+      description: "Medical technology solutions"
     },
     { 
-      name: "Roche", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Roche_logo.svg/2560px-Roche_logo.svg.png",
-      category: "global" 
+      name: "Celgene", 
+      logo: "celegene.png",
+      category: "global",
+      description: "Cancer treatment pioneer"
     },
     { 
-      name: "Merck", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Merck_%26_Co_logo.svg/2560px-Merck_%26_Co_logo.svg.png",
-      category: "global" 
+      name: "CSL Behring", 
+      logo: "CSL Behring.png",
+      category: "global",
+      description: "Biotechnology solutions"
     },
     { 
-      name: "GSK", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/GlaxoSmithKline_logo.svg/2560px-GlaxoSmithKline_logo.svg.png",
-      category: "global" 
+      name: "Dow", 
+      logo: "Dow.png",
+      category: "global",
+      description: "Material science innovation"
+    },
+    { 
+      name: "Eli Lilly", 
+      logo: "illy.png",
+      category: "global",
+      description: "Life-changing medicines"
+    },
+    { 
+      name: "Ipsen", 
+      logo: "Ipsen.png",
+      category: "global",
+      description: "Specialty care medicines"
+    },
+    { 
+      name: "Moderna", 
+      logo: "modena.png",
+      category: "global",
+      description: "Messenger therapeutics"
     },
     
-    // 국내 제약사 (실제 로고 대신 색상 블록 사용)
-    { name: "한미약품", logo: "🔴", category: "domestic" },
-    { name: "유한양행", logo: "🟢", category: "domestic" },
-    { name: "대웅제약", logo: "🟤", category: "domestic" },
-    { name: "동아제약", logo: "🟢", category: "domestic" },
-    { name: "제일약품", logo: "🔵", category: "domestic" },
-    { name: "안국약품", logo: "🔴", category: "domestic" },
+    // 국내 제약사
+    { 
+      name: "한미약품", 
+      logo: "Hanmi Pharm.png",
+      category: "domestic",
+      description: "Korean pharmaceutical excellence"
+    },
+    { 
+      name: "대웅제약", 
+      logo: "Daewoong Pharmaceutical.png",
+      category: "domestic",
+      description: "Korean pharmaceutical innovation"
+    },
+    { 
+      name: "삼성바이오에피스", 
+      logo: "Samsung Bioepis.png",
+      category: "domestic",
+      description: "Biosimilar development"
+    },
+    { 
+      name: "한국파마", 
+      logo: "한국파마 (Korea Pharma).png",
+      category: "domestic",
+      description: "Korean pharmaceutical solutions"
+    },
+    { 
+      name: "CMG제약", 
+      logo: "CMG제약 (CMG Pharm).png",
+      category: "domestic",
+      description: "Innovative drug development"
+    },
+    { 
+      name: "NOV Metapharma", 
+      logo: "NOV Metapharma.png",
+      category: "domestic",
+      description: "Metabolic disease treatment"
+    },
     
-    // 바이오 기업
-    { name: "셀트리온", logo: "🔵", category: "bio" },
-    { name: "삼성바이오로직스", logo: "🔵", category: "bio" },
-    { name: "SK바이오사이언스", logo: "🔴", category: "bio" },
-    { name: "GC녹십자", logo: "🟢", category: "bio" },
-    { name: "LG화학", logo: "🔴", category: "bio" },
-    { name: "바이오니아", logo: "🟪", category: "bio" },
-    
-    // CRO/서비스 기업
+    // 바이오테크 기업
     { 
-      name: "IQVIA", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/IQVIA_logo.svg/2560px-IQVIA_logo.svg.png",
-      category: "service" 
+      name: "Biosolution", 
+      logo: "Biosolution.png",
+      category: "biotech",
+      description: "Biotechnology solutions"
     },
     { 
-      name: "Parexel", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Parexel_logo.svg/2560px-Parexel_logo.svg.png",
-      category: "service" 
+      name: "Aston Science", 
+      logo: "Aston Sci..png",
+      category: "biotech",
+      description: "Scientific innovation"
     },
     { 
-      name: "ICON", 
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/ICON_plc_logo.svg/2560px-ICON_plc_logo.svg.png",
-      category: "service" 
+      name: "NEXEL", 
+      logo: "NEXEL.png",
+      category: "biotech",
+      description: "Next generation therapeutics"
     },
-    { name: "PRA Health", logo: "🟥", category: "service" },
-    { name: "PPD", logo: "🟪", category: "service" },
-    { name: "Syneos Health", logo: "🟦", category: "service" }
+    { 
+      name: "SciGen", 
+      logo: "SciGen.png",
+      category: "biotech",
+      description: "Science generation"
+    },
+    { 
+      name: "Infinitt Healthcare", 
+      logo: "Infinitt Healthcare.png",
+      category: "healthcare",
+      description: "Healthcare IT solutions"
+    },
+    { 
+      name: "ExoStemTech", 
+      logo: "ExoStemTech.png",
+      category: "biotech",
+      description: "Exosome stem cell technology"
+    },
+    { 
+      name: "MicroPort", 
+      logo: "MicroPort.png",
+      category: "medical",
+      description: "Medical device innovation"
+    },
+    { 
+      name: "Penumbra", 
+      logo: "Penumbra.png",
+      category: "medical",
+      description: "Medical device solutions"
+    },
+    { 
+      name: "Innovo Therapeutics", 
+      logo: "Innovo Therapeutics.png",
+      category: "biotech",
+      description: "Innovative therapeutics"
+    },
+    { 
+      name: "Allerpha International", 
+      logo: "Allerpha International.png",
+      category: "healthcare",
+      description: "International healthcare"
+    },
+    { 
+      name: "PharmAbcine", 
+      logo: "PharmAbcine.png",
+      category: "biotech",
+      description: "Antibody therapeutics"
+    }
   ]
+
+  // 자동 슬라이드 기능
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === clients.length - 1 ? 0 : prevIndex + 1
+    )
+  }, [clients.length])
+
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? clients.length - 1 : prevIndex - 1
+    )
+  }, [clients.length])
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index)
+  }
+
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying)
+  }
+
+  // 자동 슬라이드 효과
+  useEffect(() => {
+    if (!isPlaying) return
+
+    const interval = setInterval(() => {
+      nextSlide()
+    }, 3000) // 3초마다 전환
+
+    return () => clearInterval(interval)
+  }, [isPlaying, nextSlide])
 
   const content = getContent()
 
   return (
     <section id="clients" className="clients">
-      {/* 배경 이미지들 */}
-      <div className="background-images">
-        <div className="bg-image bg-1"></div>
-        <div className="bg-image bg-2"></div>
-        <div className="bg-image bg-3"></div>
-      </div>
-      
       <motion.div 
         ref={ref}
         className="clients-container"
@@ -150,39 +303,77 @@ const Clients = ({ language }) => {
           <h2 className="clients-title">{content.title}</h2>
           <p className="clients-subtitle">{content.subtitle}</p>
           <p className="clients-description">{content.description}</p>
-          <p className="clients-sub-description">{content.subDescription}</p>
         </motion.div>
 
-        <motion.div className="clients-grid" variants={itemVariants}>
-          {clients.map((client, index) => (
-            <motion.div 
-              key={index}
-              className="client-logo"
-              variants={itemVariants}
-              whileHover={{ 
-                scale: 1.1,
-                boxShadow: "0 10px 30px rgba(255, 0, 0, 0.2)"
-              }}
+        {/* 자동 슬라이드 영역 */}
+        <motion.div className="clients-slider" variants={itemVariants}>
+          <div className="slider-container">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                className="slide-content"
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  duration: 0.8,
+                  ease: "easeInOut"
+                }}
+              >
+                <div className="client-logo-container">
+                  <img 
+                    src={clients[currentIndex].logo} 
+                    alt={clients[currentIndex].name} 
+                    className="client-logo-img"
+                    onError={(e) => {
+                      e.target.style.display = 'none'
+                      e.target.nextSibling.style.display = 'flex'
+                    }}
+                  />
+                  <div className="logo-placeholder" style={{ display: 'none' }}>
+                    🏢
+                  </div>
+                </div>
+                <h3 className="client-name">{clients[currentIndex].name}</h3>
+                <p className="client-description">{clients[currentIndex].description}</p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* 슬라이더 컨트롤 - 방향표 버튼 삭제 */}
+          {/* <div className="slider-controls">
+            <button 
+              className="control-btn prev-btn"
+              onClick={prevSlide}
+              aria-label="Previous slide"
             >
-              {client.logo.startsWith('http') ? (
-                <img 
-                  src={client.logo} 
-                  alt={client.name} 
-                  className="client-logo-img"
-                  onError={(e) => {
-                    e.target.style.display = 'none'
-                    e.target.nextSibling.style.display = 'flex'
-                  }}
-                />
-              ) : null}
-              <div className="logo-placeholder" style={{ display: client.logo.startsWith('http') ? 'none' : 'flex' }}>
-                {client.logo}
-              </div>
-              <span className="client-name">{client.name}</span>
-            </motion.div>
-          ))}
+              ‹
+            </button>
+            
+            <button 
+              className="control-btn next-btn"
+              onClick={nextSlide}
+              aria-label="Next slide"
+            >
+              ›
+            </button>
+          </div> */}
+
+          {/* 슬라이드 인디케이터 */}
+          <div className="slider-indicators">
+            {clients.map((_, index) => (
+              <button
+                key={index}
+                className={`indicator ${index === currentIndex ? 'active' : ''}`}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </motion.div>
 
+        {/* 하단 CTA */}
         <motion.div 
           className="clients-cta"
           variants={itemVariants}

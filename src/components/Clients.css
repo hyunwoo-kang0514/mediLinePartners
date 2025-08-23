@@ -3,10 +3,24 @@
   width: 100%;
   display: flex;
   align-items: center;
-  background: white;
+  background: linear-gradient(135deg, #fefefe 0%, #f8f9fa 50%, #f5f7fa 100%);
   padding: 5rem 0;
   position: relative;
   overflow: hidden;
+}
+
+.clients::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 0, 0, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 68, 68, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 0, 0, 0.01) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 /* 배경 이미지들 */
@@ -70,7 +84,7 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .clients-header {
@@ -83,154 +97,235 @@
   font-weight: 700;
   color: #333;
   margin-bottom: 1rem;
-  line-height: 1.2;
 }
 
 .clients-subtitle {
-  font-size: 1.8rem;
-  color: #FF0000;
-  margin-bottom: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
+  color: #666;
+  margin-bottom: 1rem;
 }
 
 .clients-description {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.clients-sub-description {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #666;
-  margin-bottom: 3rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
-.clients-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.client-logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 15px;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
+/* 자동 슬라이드 영역 */
+.clients-slider {
   position: relative;
-  overflow: hidden;
+  margin-bottom: 4rem;
 }
 
-.client-logo::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
-  transition: left 0.5s ease;
-}
-
-.client-logo:hover::before {
-  left: 100%;
-}
-
-.client-logo:hover {
-  background: white;
-  border-color: #FF0000;
-  transform: translateY(-5px);
-}
-
-.client-logo-img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 1rem;
-  background: white;
-  border-radius: 10px;
-  padding: 0.5rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.client-logo:hover .client-logo-img {
-  transform: scale(1.1);
-  box-shadow: 0 5px 20px rgba(255, 0, 0, 0.2);
-}
-
-.logo-placeholder {
-  width: 60px;
-  height: 60px;
+.slider-container {
+  position: relative;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.slide-content {
+  text-align: center;
+  max-width: 500px;
+  padding: 2rem;
+}
+
+.client-logo-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; /* 200px에서 300px로 확대 */
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.client-logo-img {
+  max-width: 300px; /* 200px에서 300px로 확대 */
+  max-height: 250px; /* 150px에서 250px로 확대 */
+  object-fit: contain;
+  filter: grayscale(0);
+  transition: all 0.3s ease;
+}
+
+.client-logo-img:hover {
+  filter: grayscale(0);
+  transform: scale(1.05);
+}
+
+.logo-placeholder {
+  width: 300px; /* 150px에서 300px로 확대 */
+  height: 250px; /* 150px에서 250px로 확대 */
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem; /* 4rem에서 6rem으로 확대 */
+  color: #6c757d;
+  border: 2px dashed #dee2e6;
+  position: relative;
+}
+
+.logo-placeholder::before {
+  content: "🏢";
+  font-size: 5rem; /* 3rem에서 5rem으로 확대 */
+  opacity: 0.7;
+}
+
+.logo-placeholder::after {
+  content: "로고";
+  position: absolute;
+  bottom: 20px; /* 10px에서 20px로 확대 */
+  font-size: 1.4rem; /* 0.9rem에서 1.4rem으로 확대 */
+  color: #6c757d;
+  font-weight: 500;
 }
 
 .client-name {
-  font-size: 0.9rem;
+  font-size: 3.5rem; /* 2.5rem에서 3.5rem으로 확대 */
+  font-weight: 700;
   color: #333;
-  font-weight: 500;
-  text-align: center;
-  line-height: 1.3;
+  margin-bottom: 1.5rem; /* 1rem에서 1.5rem으로 확대 */
+  line-height: 1.1; /* 1.2에서 1.1로 줄여서 두 줄일 때도 깔끔하게 */
+  white-space: normal; /* nowrap 제거, 자연스러운 줄바꿈 허용 */
+  overflow: visible; /* hidden 제거, 전체 텍스트 표시 */
+  text-overflow: clip; /* ellipsis 제거 */
+  max-width: 1000px; /* 충분한 너비 유지 */
+  text-align: center; /* 중앙 정렬 */
+  word-break: keep-all; /* 한글 단어 단위로 줄바꿈 */
+  margin-left: auto; /* 중앙 정렬을 위한 마진 */
+  margin-right: auto; /* 중앙 정렬을 위한 마진 */
 }
 
+.client-description {
+  font-size: 1.6rem; /* 1.2rem에서 1.6rem으로 확대 */
+  color: #666;
+  line-height: 1.6;
+  max-width: 500px; /* 400px에서 500px로 확대 */
+  margin: 0 auto;
+}
+
+/* 슬라이더 컨트롤 현대화 */
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(255, 0, 0, 0.2);
+  color: #ff0000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(10px);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.control-btn:hover {
+  background: #ff0000;
+  color: white;
+  border-color: #ff0000;
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+/* 재생/일시정지 버튼 숨김 */
+.play-pause-btn {
+  display: none !important;
+}
+
+.prev-btn, .next-btn {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* 슬라이더 인디케이터 완전 숨김 */
+.slider-indicators {
+  display: none !important;
+}
+
+/* 하단 CTA */
 .clients-cta {
   text-align: center;
 }
 
-.clients-cta .cta-button {
+.cta-button {
   display: inline-block;
-  background: linear-gradient(45deg, #FF0000, #FF4444);
+  background: #FF0000;
   color: white;
-  padding: 1.2rem 3rem;
+  padding: 1.2rem 2.5rem;
   border-radius: 50px;
   text-decoration: none;
+  font-size: 1.2rem;
   font-weight: 600;
-  font-size: 1.1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
-  position: relative;
-  overflow: hidden;
+  border: 2px solid #FF0000;
 }
 
-.clients-cta .cta-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.clients-cta .cta-button:hover::before {
-  left: 100%;
-}
-
-.clients-cta .cta-button:hover {
+.cta-button:hover {
+  background: white;
+  color: #FF0000;
   transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(255, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .clients-container {
+    padding: 0 1.5rem;
+  }
+  
+  .clients-title {
+    font-size: 2.5rem;
+  }
+  
+  .clients-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .slider-container {
+    height: 350px;
+  }
+  
+  .client-logo-container {
+    height: 180px;
+  }
+  
+  .client-logo-img {
+    max-width: 180px;
+    max-height: 130px;
+  }
+  
+  .client-name {
+    font-size: 2.2rem;
+  }
 }
 
 @media (max-width: 768px) {
   .clients-container {
     padding: 0 1rem;
-    min-height: calc(100vh - 10rem);
   }
   
   .clients-title {
@@ -238,65 +333,131 @@
   }
   
   .clients-subtitle {
-    font-size: 1.4rem;
-  }
-  
-  .clients-description {
     font-size: 1.2rem;
   }
   
-  .clients-sub-description {
-    font-size: 1rem;
+  .clients-description {
+    font-size: 1.1rem;
   }
   
-  .clients-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
+  .slider-container {
+    height: 300px;
   }
   
-  .client-logo {
-    padding: 1rem;
+  .slide-content {
+    padding: 1.5rem;
   }
   
-  .client-logo-img,
-  .logo-placeholder {
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
+  .client-logo-container {
+    height: 150px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .client-logo-img {
+    max-width: 150px;
+    max-height: 100px;
   }
   
   .client-name {
-    font-size: 0.8rem;
+    font-size: 2rem;
   }
   
-  .clients-cta .cta-button {
-    padding: 1rem 2rem;
-    font-size: 1rem;
+  .client-description {
+    font-size: 1.1rem;
   }
   
-  .bg-1, .bg-2, .bg-3 {
-    display: none;
+  .control-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+  
+  .play-pause-btn {
+    width: 55px;
+    height: 55px;
+    font-size: 1.1rem;
+  }
+  
+  .prev-btn, .next-btn {
+    font-size: 1.8rem;
+  }
+  
+  .indicator {
+    width: 10px;
+    height: 10px;
   }
 }
 
 @media (max-width: 480px) {
-  .clients-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.8rem;
+  .clients-title {
+    font-size: 1.8rem;
   }
   
-  .client-logo {
-    padding: 0.8rem;
+  .clients-subtitle {
+    font-size: 1.1rem;
   }
   
-  .client-logo-img,
-  .logo-placeholder {
+  .clients-description {
+    font-size: 1rem;
+  }
+  
+  .slider-container {
+    height: 250px;
+  }
+  
+  .slide-content {
+    padding: 1rem;
+  }
+  
+  .client-logo-container {
+    height: 120px;
+    margin-bottom: 1rem;
+  }
+  
+  .client-logo-img {
+    max-width: 120px;
+    max-height: 80px;
+  }
+  
+  .client-name {
+    font-size: 1.6rem;
+  }
+  
+  .client-description {
+    font-size: 1rem;
+  }
+  
+  .control-btn {
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
   }
   
-  .client-name {
-    font-size: 0.7rem;
+  .play-pause-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+  
+  .prev-btn, .next-btn {
+    font-size: 1.6rem;
+  }
+  
+  .slider-controls {
+    gap: 0.8rem;
+  }
+  
+  .slider-indicators {
+    gap: 0.4rem;
+  }
+  
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .cta-button {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
   }
 } 

@@ -22,7 +22,8 @@ const Hero = ({ language }) => {
       heroSubtitle: '20년 연속 업계 1위',
       heroDescription: 'CRO 컨설팅 전문',
       heroEnd: '기업입니다.',
-      visualType: 'about'
+      visualType: 'about',
+      isLargeVisual: true
     },
     { 
       id: 1, 
@@ -33,7 +34,8 @@ const Hero = ({ language }) => {
       heroSubtitle: '약물감시 서비스',
       heroDescription: '안전성 확보를 위한',
       heroEnd: '체계적인 관리',
-      visualType: 'pv'
+      visualType: 'pv',
+      isLargeVisual: false
     },
     { 
       id: 2, 
@@ -44,7 +46,8 @@ const Hero = ({ language }) => {
       heroSubtitle: '인허가 컨설팅',
       heroDescription: '성공적인 승인을 위한',
       heroEnd: '전문 서비스',
-      visualType: 'ra'
+      visualType: 'ra',
+      isLargeVisual: false
     }
   ]
 
@@ -123,34 +126,96 @@ const Hero = ({ language }) => {
   const content = getContent()
   const currentTab = tabs[activeTab]
 
-  // 시각적 요소 렌더링 함수
-  const renderVisualElements = (type) => {
+  // About Us 탭의 큰 시각적 요소 렌더링
+  const renderAboutUsLargeVisual = () => {
+    return (
+      <div className="about-large-visual">
+        <div className="large-visual-container">
+          {/* 메인 헥사곤 플랫폼 */}
+          <div className="hexagon-platform">
+            <div className="hexagon-glow"></div>
+            <div className="hexagon-content">
+              <div className="company-icon">
+                <div className="icon-circle">
+                  <div className="icon-symbol">M</div>
+                </div>
+              </div>
+              <div className="achievement-badges">
+                <div className="badge badge-1">
+                  <div className="badge-icon">🏆</div>
+                  <div className="badge-text">1위</div>
+                </div>
+                <div className="badge badge-2">
+                  <div className="badge-icon">⭐</div>
+                  <div className="badge-text">20년</div>
+                </div>
+                <div className="badge badge-3">
+                  <div className="badge-icon">💎</div>
+                  <div className="badge-text">전문</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 플로팅 요소들 */}
+          <div className="floating-elements">
+            <div className="floating-card card-1">
+              <div className="card-icon">📊</div>
+              <div className="card-text">성장률</div>
+              <div className="card-value">+150%</div>
+            </div>
+            <div className="floating-card card-2">
+              <div className="card-icon">🤝</div>
+              <div className="card-text">파트너</div>
+              <div className="card-value">500+</div>
+            </div>
+            <div className="floating-card card-3">
+              <div className="card-icon">🌍</div>
+              <div className="card-text">글로벌</div>
+              <div className="card-value">30+</div>
+            </div>
+            <div className="floating-card card-4">
+              <div className="card-icon">✅</div>
+              <div className="card-text">성공률</div>
+              <div className="card-value">98%</div>
+            </div>
+          </div>
+
+          {/* 연결선과 파티클 */}
+          <div className="connection-lines">
+            <div className="line line-1"></div>
+            <div className="line line-2"></div>
+            <div className="line line-3"></div>
+            <div className="line line-4"></div>
+          </div>
+
+          {/* 파티클 효과 */}
+          <div className="particles">
+            <div className="particle particle-1"></div>
+            <div className="particle particle-2"></div>
+            <div className="particle particle-3"></div>
+            <div className="particle particle-4"></div>
+            <div className="particle particle-5"></div>
+            <div className="particle particle-6"></div>
+          </div>
+
+          {/* 배경 그라데이션 원들 */}
+          <div className="background-circles">
+            <div className="bg-circle circle-1"></div>
+            <div className="bg-circle circle-2"></div>
+            <div className="bg-circle circle-3"></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // 일반 탭의 시각적 요소 렌더링
+  const renderNormalVisual = (type) => {
     switch(type) {
-      case 'about':
-        return (
-          <>
-            {/* About Us - 회사 소개 관련 요소 */}
-            <div className="visual-element about-element-1">
-              <div className="element-icon">🏆</div>
-              <div className="element-text">20년 연속 1위</div>
-            </div>
-            <div className="visual-element about-element-2">
-              <div className="element-icon">📈</div>
-              <div className="element-text">성장 그래프</div>
-            </div>
-            <div className="visual-element about-element-3">
-              <div className="element-icon">🤝</div>
-              <div className="element-text">파트너십</div>
-            </div>
-            <div className="central-figure about-figure">
-              <div className="figure-icon">🏢</div>
-            </div>
-          </>
-        )
       case 'pv':
         return (
           <>
-            {/* PV 서비스 - 약물감시 관련 요소 */}
             <div className="visual-element pv-element-1">
               <div className="element-icon">📚</div>
               <div className="element-text">약물감시 용어집</div>
@@ -166,18 +231,11 @@ const Hero = ({ language }) => {
             <div className="central-figure pv-figure">
               <div className="figure-icon">💊</div>
             </div>
-            <div className="floating-book pv-book">
-              <div className="book-cover">
-                <div className="book-title">PV</div>
-                <div className="book-subtitle">약물감시</div>
-              </div>
-            </div>
           </>
         )
       case 'ra':
         return (
           <>
-            {/* RA 서비스 - 인허가 관련 요소 */}
             <div className="visual-element ra-element-1">
               <div className="element-icon">📖</div>
               <div className="element-text">규정 가이드</div>
@@ -192,12 +250,6 @@ const Hero = ({ language }) => {
             </div>
             <div className="central-figure ra-figure">
               <div className="figure-icon">📜</div>
-            </div>
-            <div className="floating-book ra-book">
-              <div className="book-cover">
-                <div className="book-title">RA</div>
-                <div className="book-subtitle">인허가</div>
-              </div>
             </div>
           </>
         )
@@ -224,8 +276,12 @@ const Hero = ({ language }) => {
               transition={{ duration: 0.5 }}
             >
               {currentTab.heroTitle}<br />
-              <span className="highlight">{currentTab.heroSubtitle}</span><br />
-              <span className="highlight">{currentTab.heroDescription}</span><br />
+              <span className={`highlight ${currentTab.isLargeVisual ? 'large-highlight' : ''}`}>
+                {currentTab.heroSubtitle}
+              </span><br />
+              <span className={`highlight ${currentTab.isLargeVisual ? 'large-highlight' : ''}`}>
+                {currentTab.heroDescription}
+              </span><br />
               {currentTab.heroEnd}
             </motion.h1>
             <p className="hero-subtitle">{content.description}</p>
@@ -237,7 +293,7 @@ const Hero = ({ language }) => {
 
           <motion.div className="hero-image" variants={itemVariants}>
             <div className="hero-visual">
-              <div className="visual-container">
+              <div className={`visual-container ${currentTab.isLargeVisual ? 'large-container' : ''}`}>
                 <motion.div 
                   className="data-visualization"
                   key={activeTab}
@@ -245,7 +301,7 @@ const Hero = ({ language }) => {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6 }}
                 >
-                  {renderVisualElements(currentTab.visualType)}
+                  {currentTab.isLargeVisual ? renderAboutUsLargeVisual() : renderNormalVisual(currentTab.visualType)}
                 </motion.div>
               </div>
             </div>

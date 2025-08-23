@@ -48,16 +48,11 @@ const Header = ({ language, onLanguageChange }) => {
       <div className="header-container">
         <div className="logo">
           <div className="logo-icon">
-            <div className="logo-symbol">
-              <div className="symbol-line line-1"></div>
-              <div className="symbol-line line-2"></div>
-              <div className="symbol-line line-3"></div>
-              <div className="symbol-line line-4"></div>
-              <div className="symbol-center"></div>
-            </div>
+            <div className="big-m">M</div>
           </div>
           <div className="logo-text">
-            <h1>MEDILINEPARTNERS</h1>
+            <h1>MEDILINE</h1>
+            <h2>PARTNERS</h2>
           </div>
         </div>
         
